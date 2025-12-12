@@ -5,8 +5,8 @@
         "summary": "Vulnerabilidade Type-Confusion",
         "date": "Nov 11, 2025",
         "category": "Hacking Club",
-        "file": "challenges/proxy/proxy.md",
-        "image": "images/hackingclub-proxy/file-proxy-2025-4.png",
+        "file": "proxy/proxy.md",
+        "image": "/images/hackingclub-proxy/file-proxy-2025-4.png",
         "author": "Jorge Martin"
     }
 ]
