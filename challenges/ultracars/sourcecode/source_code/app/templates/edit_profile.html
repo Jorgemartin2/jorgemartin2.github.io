@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile - Ultra Cars{% endblock %}
+{% block content %}
+<div class="edit-profile-container">
+    <h1>Edit Profile</h1>
+    <div class="profile-info">
+        <div><strong>Name:</strong> <span class="profile-value">{{ profile.name }}</span></div>
+        <div><strong>Description:</strong> <span class="profile-value">{{ profile.description }}</span></div>
+    </div>
+    {% if result %}
+        <div class="result">{{ result }}</div>
+    {% endif %}
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="{{ profile.name }}" required>
+        </div>
+        <div class="form-row">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="4" required>{{ profile.description }}</textarea>
+        </div>
+        <button type="submit" class="profile-btn">Update Profile</button>
+    </form>
+</div>
+<style>
+.edit-profile-container {
+    max-width: 420px;
+    margin: 100px auto 0 auto;
+    background: #181818ee;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e1060030, 0 1.5px 8px #fff2;
+    padding: 40px 36px 32px 36px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+.edit-profile-container h1 {
+    color: #e10600;
+    font-size: 2.1rem;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px #fff;
+    font-family: 'Orbitron', Arial, sans-serif;
+}
+.profile-info {
+    margin-bottom: 24px;
+    text-align: left;
+    background: #232526;
+    border-radius: 10px;
+    padding: 18px 18px 10px 18px;
+    box-shadow: 0 2px 8px #e1060040;
+}
+.profile-info strong {
+    color: #e10600;
+    font-weight: bold;
+}
+.profile-value {
+    color: #fff;
+    font-weight: normal;
+    margin-left: 6px;
+}
+.profile-form {
+    margin-top: 18px;
+    text-align: left;
+}
+.form-row {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+.form-row label {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+.form-row input, .form-row textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1.5px solid #e10600;
+    background: #181818;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+.form-row input:focus, .form-row textarea:focus {
+    border: 1.5px solid #fff;
+}
+.profile-btn {
+    width: 100%;
+    padding: 13px 0;
+    background: linear-gradient(90deg, #e10600 0%, #fff 100%);
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e1060040;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+.profile-btn:hover {
+    background: linear-gradient(90deg, #fff 0%, #e10600 100%);
+    color: #e10600;
+    box-shadow: 0 4px 16px #e10600cc;
+}
+.result, .error {
+    margin-bottom: 18px;
+    font-weight: bold;
+}
+.result { color: #00ffe7; }
+.error { color: #ff2d55; }
+@media (max-width: 700px) {
+    .edit-profile-container {
+        margin-top: 10px;
+        padding: 18px 6px 18px 6px;
+    }
+    .profile-info {
+        padding: 10px 6px 6px 6px;
+    }
+    .profile-form {
+        padding: 0 2px;
+    }
+}
+</style>
+{% endblock %} 

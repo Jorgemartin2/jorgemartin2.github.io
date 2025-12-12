@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %}Login - Ultra Cars{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <h1>Sign In</h1>
+    {% if messages %}
+        <div class="messages">
+        {% for message in messages %}
+            {{ message }}<br>
+        {% endfor %}
+        </div>
+    {% endif %}
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div class="form-row">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <button type="submit" class="auth-btn">Sign In</button>
+    </form>
+    <div class="auth-links">
+        <a class="auth-link" href="/signup/">Create Account</a>
+        <a class="auth-link" href="/">&#8592; Back to Home</a>
+    </div>
+</div>
+<style>
+.auth-container {
+    max-width: 370px;
+    margin: 100px auto 0 auto;
+    background: #181818ee;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e1060030, 0 1.5px 8px #fff2;
+    padding: 40px 36px 32px 36px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+.auth-container h1 {
+    color: #e10600;
+    font-size: 2.1rem;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px #fff;
+    font-family: 'Orbitron', Arial, sans-serif;
+}
+.messages {
+    margin-bottom: 18px;
+    color: #ff2d55;
+    text-align: center;
+    font-weight: bold;
+}
+.auth-form {
+    margin-top: 18px;
+    text-align: left;
+}
+.form-row {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+.form-row label {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+.form-row input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1.5px solid #e10600;
+    background: #181818;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+.form-row input:focus {
+    border: 1.5px solid #fff;
+}
+.auth-btn {
+    width: 100%;
+    padding: 13px 0;
+    background: linear-gradient(90deg, #e10600 0%, #fff 100%);
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e1060040;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+.auth-btn:hover {
+    background: linear-gradient(90deg, #fff 0%, #e10600 100%);
+    color: #e10600;
+    box-shadow: 0 4px 16px #e10600cc;
+}
+.auth-links {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+.auth-link {
+    color: #e10600;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.auth-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+@media (max-width: 700px) {
+    .auth-container {
+        margin-top: 10px;
+        padding: 18px 6px 18px 6px;
+    }
+    .auth-form {
+        padding: 0 2px;
+    }
+    .auth-links {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+}
+</style>
+{% endblock %}

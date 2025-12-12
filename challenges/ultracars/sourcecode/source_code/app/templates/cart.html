@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% block title %}Cart - Ultra Cars{% endblock %}
+{% block content %}
+<div class="cart-container">
+    <h1>Your Cart</h1>
+    {% if cart %}
+        <ul class="cart-list">
+            {% for car in cart %}
+                <li>{{ car }} <a href="?remove={{ car|urlencode }}" class="remove-btn" title="Remove">&times;</a></li>
+            {% endfor %}
+        </ul>
+        <form class="checkout-form" autocomplete="off">
+            <h2>Checkout</h2>
+            <div class="form-row">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="you@email.com" required>
+            </div>
+            <div class="form-row">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" placeholder="Your Address" required>
+            </div>
+            <div class="form-row">
+                <label for="payment">Payment Method</label>
+                <select id="payment" name="payment" required>
+                    <option value="credit">Credit Card</option>
+                    <option value="pix">PIX</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="crypto">Crypto</option>
+                </select>
+            </div>
+            <button type="button" class="checkout-btn" onclick="fakeCheckout()">Finish Purchase</button>
+            <div id="checkout-message"></div>
+        </form>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+<style>
+.cart-container {
+    max-width: 600px;
+    margin: 100px auto 0 auto;
+    background: #181818ee;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e1060030, 0 1.5px 8px #fff2;
+    padding: 40px 36px 32px 36px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+.cart-container h1 {
+    color: #e10600;
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px #fff;
+    font-family: 'Orbitron', Arial, sans-serif;
+}
+.cart-list {
+    margin: 30px 0 18px 0;
+    padding: 0;
+    list-style: none;
+}
+.cart-list li {
+    background: #232526;
+    margin-bottom: 16px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #e1060040;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: left;
+    border-left: 4px solid #e10600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.remove-btn {
+    color: #e10600;
+    background: #fff;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    font-weight: bold;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-left: 12px;
+    border: 2px solid #e10600;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.remove-btn:hover {
+    background: #e10600;
+    color: #fff;
+    border: 2px solid #fff;
+}
+.checkout-form {
+    background: #232526;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #e1060040;
+    padding: 28px 22px 18px 22px;
+    margin-top: 18px;
+    text-align: left;
+}
+.checkout-form h2 {
+    color: #e10600;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    font-family: 'Orbitron', Arial, sans-serif;
+}
+.form-row {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.form-row label {
+    color: #fff;
+    font-size: 1.05rem;
+    margin-bottom: 5px;
+}
+.form-row input, .form-row select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1.5px solid #e10600;
+    background: #181818;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+.form-row input:focus, .form-row select:focus {
+    border: 1.5px solid #fff;
+}
+.checkout-btn {
+    width: 100%;
+    padding: 13px 0;
+    background: linear-gradient(90deg, #e10600 0%, #fff 100%);
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e1060040;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+.checkout-btn:hover {
+    background: linear-gradient(90deg, #fff 0%, #e10600 100%);
+    color: #e10600;
+    box-shadow: 0 4px 16px #e10600cc;
+}
+#checkout-message {
+    margin-top: 18px;
+    color: #e10600;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: center;
+}
+@media (max-width: 700px) {
+    .cart-container {
+        margin-top: 10px;
+        padding: 18px 6px 18px 6px;
+    }
+    .checkout-form {
+        padding: 18px 6px 12px 6px;
+    }
+}
+</style>
+<script>
+function fakeCheckout() {
+    document.getElementById('checkout-message').textContent = 'Check your email to continue your purchase.';
+}
+</script>
+{% endblock %} 

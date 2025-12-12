@@ -1,0 +1,19 @@
+# Git
+.git
+.gitignore
+README.md
+
+# Python
+__pycache__
+
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore

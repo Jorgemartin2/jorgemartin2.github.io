@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - Ultra Cars{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome, {{ request.user.username }}!</h1>
+    <p>This is your Ultra Cars dashboard.<br>
+    Here you can buy the best sports cars in the universe!</p>
+    <div id="buy-message" style="margin-bottom:20px;font-weight:bold;color:#e10600;"></div>
+    <div class="cars-market">
+        <div class="car-card">
+            <img src="../static/app/img/ferrari.png" alt="Ferrari 488">
+            <div class="car-info">
+                <h2>Ferrari 488 GTB</h2>
+                <p>670 HP · 0-100 km/h in 3.0s · Italian Excellence</p>
+                <button class="buy-btn" onclick="buyCar('Ferrari 488 GTB')">Buy</button>
+            </div>
+        </div>
+        <div class="car-card">
+            <img src="../static/app/img/lamb.png" alt="Lamborghini Aventador">
+            <div class="car-info">
+                <h2>Lamborghini Aventador</h2>
+                <p>740 HP · 0-100 km/h in 2.9s · Pure Power</p>
+                <button class="buy-btn" onclick="buyCar('Lamborghini Aventador')">Buy</button>
+            </div>
+        </div>
+        <div class="car-card">
+            <img src="../static/app/img/porsh.png" alt="Porsche 911 Turbo S">
+            <div class="car-info">
+                <h2>Porsche 911 Turbo S</h2>
+                <p>650 HP · 0-100 km/h in 2.7s · German Precision</p>
+                <button class="buy-btn" onclick="buyCar('Porsche 911 Turbo S')">Buy</button>
+            </div>
+        </div>
+        <div class="car-card">
+            <img src="../static/app/img/McLaren.png" alt="McLaren 720S">
+            <div class="car-info">
+                <h2>McLaren 720S</h2>
+                <p>720 HP · 0-100 km/h in 2.9s · British Engineering</p>
+                <button class="buy-btn" onclick="buyCar('McLaren 720S')">Buy</button>
+            </div>
+        </div>
+        <div class="car-card">
+            <img src="../static/app/img/Bugatti.png" alt="Bugatti Chiron">
+            <div class="car-info">
+                <h2>Bugatti Chiron</h2>
+                <p>1500 HP · 0-100 km/h in 2.4s · Hypercar Legend</p>
+                <button class="buy-btn" onclick="buyCar('Bugatti Chiron')">Buy</button>
+            </div>
+        </div>
+        <div class="car-card">
+            <img src="../static/app/img/AstonMartin.png" alt="Aston Martin Vantage">
+            <div class="car-info">
+                <h2>Aston Martin Vantage</h2>
+                <p>510 HP · 0-100 km/h in 3.6s · British Luxury</p>
+                <button class="buy-btn" onclick="buyCar('Aston Martin Vantage')">Buy</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+.dashboard-container {
+    max-width: 1200px;
+    margin: 100px auto 0 auto;
+    background: #181818ee;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e1060030, 0 1.5px 8px #fff2;
+    padding: 40px 36px 32px 36px;
+    text-align: center;
+    z-index: 2;
+    position: relative;
+}
+.dashboard-container h1 {
+    color: #e10600;
+    font-size: 2.3rem;
+    margin-bottom: 18px;
+    text-shadow: 0 0 8px #fff;
+    font-family: 'Orbitron', Arial, sans-serif;
+}
+.dashboard-container p {
+    color: #eee;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+.cars-market {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 36px;
+    margin: 40px 0 0 0;
+}
+.car-card {
+    background: #232526;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px #e1060030, 0 1.5px 8px #fff2;
+    overflow: hidden;
+    width: 330px;
+    transition: transform 0.18s, box-shadow 0.18s;
+    border: 2.5px solid #e10600;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.car-card:hover {
+    transform: scale(1.045) translateY(-6px);
+    box-shadow: 0 12px 40px #e10600cc, 0 2px 12px #fff3;
+    z-index: 2;
+}
+.car-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-bottom: 2px solid #e10600;
+}
+.car-card .car-info {
+    padding: 22px 18px 18px 18px;
+    text-align: left;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.car-card .car-info h2 {
+    margin: 0 0 10px 0;
+    color: #fff;
+    font-size: 1.35rem;
+    font-family: 'Orbitron', Arial, sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #e10600;
+}
+.car-card .car-info p {
+    margin: 0 0 18px 0;
+    color: #ccc;
+    font-size: 1.08rem;
+}
+.buy-btn {
+    width: 100%;
+    padding: 13px 0;
+    background: linear-gradient(90deg, #e10600 0%, #fff 100%);
+    color: #181818;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e1060040;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+.buy-btn:hover {
+    background: linear-gradient(90deg, #fff 0%, #e10600 100%);
+    color: #e10600;
+    box-shadow: 0 4px 16px #e10600cc;
+}
+@media (max-width: 900px) {
+    .cars-market {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+    .dashboard-container {
+        margin-top: 10px;
+    }
+}
+</style>
+<script>
+function buyCar(car) {
+    fetch('/buy_car/', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: 'car=' + encodeURIComponent(car)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('buy-message').textContent = data.message;
+    });
+}
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock %}

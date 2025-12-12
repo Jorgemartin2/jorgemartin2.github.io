@@ -1,0 +1,52 @@
+[
+  {
+    "id": "reborn",
+    "title": "Reborn",
+    "summary": "Essa máquina inicia seu vetor de ataque por meio de uma vulnerabilidade de command injection<br> presente na aplicação web.",
+    "date": "Oct 1, 2025",
+    "category": "Hacking Club",
+    "file": "posts/reborn/reborn.md",
+    "image": "images/hackingclub-reborn/file-reborn-2025-1.png",
+    "author": "Jorge Martin"
+  },
+  {
+    "id": "locked",
+    "title": "Locked",
+    "summary": "O comprometimento desta máquina começa com uma falha de deserialização insegura em PHP,<br> explorada diretamente no aplicativo web.",
+    "date": "Oct 25, 2025",
+    "category": "Hacking Club",
+    "file": "posts/locked/locked.md",
+    "image": "images/hackingclub-locked/file-locked-2025-1.png",
+    "author": "Jorge Martin"
+  },
+  {
+    "id": "neonforge",
+    "title": "NeonForge",
+    "summary": "A exploração desta máquina se inicia através de uma vulnerabilidade de SSTI, permitindo<br> manipulação do mecanismo de template.",
+    "date": "Nov 10, 2025",
+    "category": "Hacking Club",
+    "file": "posts/neonforge/neonforge.md",
+    "image": "images/hackingclub-neonforge/file-neonforge-2025-1.png",
+    "author": "Jorge Martin"
+  },
+  {
+    "id": "webflow",
+    "title": "WebFlow",
+    "summary": "O vetor inicial envolve uma falha de Arbitrary File Read utilizando o recurso @fs,<br> possibilitando acesso a arquivos sensíveis.",
+    "date": "Nov 20, 2025",
+    "category": "Hacking Club",
+    "file": "posts/webflow/webflow.md",
+    "image": "images/hackingclub-webflow/file-webflow-2025-1.png",
+    "author": "Jorge Martin"
+  },
+  {
+    "id": "extract",
+    "title": "Extract",
+    "summary": "O comprometimento começa com a exploração de uma vulnerabilidade de SSRF,<br> permitindo interação direta com serviços internos.",
+    "date": "Dec 11, 2025",
+    "category": "Hacking Club",
+    "file": "posts/extract/extract.md",
+    "image": "images/hackingclub-extract/file-extract-2025-1.png",
+    "author": "Jorge Martin"
+  }
+]
