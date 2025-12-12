@@ -1,0 +1,49 @@
+name: Update Challenge Date
+
+on:
+  push:
+    paths:
+      - "posts/**/*.md"
+
+jobs:
+  update-date:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Identify modified markdown file
+        id: changed
+        run: |
+          FILE=$(git diff --name-only HEAD~1 HEAD | grep ".md$")
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+
+      - name: Extract ID from filename
+        id: extract
+        run: |
+          FILE=${{ steps.changed.outputs.file }}
+          BASENAME=$(basename "$FILE" .md)
+          echo "id=$BASENAME" >> $GITHUB_OUTPUT
+
+      - name: Update JSON date
+        run: |
+          ID=${{ steps.extract.outputs.id }}
+
+          # Data formatada estilo "Nov 20, 2025"
+          DATE=$(date +"%b %-d, %Y")
+
+          # Atualiza somente o item com o id correto ⚡
+          jq --arg id "$ID" --arg date "$DATE" '
+            map(if .id == $id then .date = $date else . end)
+          ' challenges.json > challenges.tmp
+
+          mv challenges.tmp challenges.json
+
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add challenges.json
+          git commit -m "Auto-update date for ${{ steps.extract.outputs.id }}"
+          git push
