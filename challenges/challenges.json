@@ -8,5 +8,15 @@
         "file": "proxy/proxy.md",
         "image": "/images/hackingclub-proxy/file-proxy-2025-4.png",
         "author": "Jorge Martin"
+    },
+    {
+        "id": "skywings",
+        "title": "SkyWings",
+        "summary": "Vulnerabilidade RCE no React e Next.js",
+        "date": "Nov 11, 2025",
+        "category": "Hacking Club",
+        "file": "skywings/skywings.md",
+        "image": "/images/hackingclub-skywings/file-skywings-2025-3.png",
+        "author": "Jorge Martin"
     }
 ]

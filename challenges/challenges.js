@@ -40,9 +40,19 @@ async function mostrarDetalhe(post) {
     const resposta = await fetch(post.file);
     const markdown = await resposta.text();
 
+      const promptExtension = () => [{
+    type: 'lang',
+    regex: /(^>[\s\S]*?)\s*\{\:\s*\.([\w-]+)\s*\}/gm,
+    replace: (match, content, cls) => {
+      const inner = content.replace(/^>\s?/gm, '').trim();
+      return `<blockquote class="${cls}">${inner}</blockquote>`;
+    }
+  }];
+
     const converter = new showdown.Converter({
         tables: true,
-        ghCodeBlocks: true
+        ghCodeBlocks: true,
+        extensions: [promptExtension]
     });
 
     let html = converter.makeHtml(markdown);

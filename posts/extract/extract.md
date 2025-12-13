@@ -128,7 +128,7 @@ Com esse acesso indireto, conseguimos consultar endpoints internos do Grafana qu
 
 - [Grafana Pentesting](https://hackviser.com/tactics/pentesting/services/grafana)
 
-1.      Realizamos uma requisição ao endpoint `/api/search`, que é utilizado pelo próprio Grafana para listar os dashboards disponíveis. Essa consulta permitiu enumerar todos os dashboards existentes no ambiente, incluindo painéis privados que normalmente não seriam acessíveis externamente.  
+1 - Realizamos uma requisição ao endpoint `/api/search`, que é utilizado pelo próprio Grafana para listar os dashboards disponíveis. Essa consulta permitiu enumerar todos os dashboards existentes no ambiente, incluindo painéis privados que normalmente não seriam acessíveis externamente.  
 
 ```bash
 http://0x7f000001:3000/api/search
@@ -138,7 +138,7 @@ http://0x7f000001:3000/api/search
 
 - **UID** : `private-users`
 
-2.      Após identificar o UID dos dashboards privados, realizamos uma requisição ao endpoint `/api/dashboards/uid/[uid]`, permitindo enumerar todos os usuários vinculados a esses painéis.
+2 - Após identificar o UID dos dashboards privados, realizamos uma requisição ao endpoint `/api/dashboards/uid/[uid]`, permitindo enumerar todos os usuários vinculados a esses painéis.
 
 ```bash
 http://0x7f000001:3000/api/dashboards/uid/private-users
@@ -309,7 +309,7 @@ O binário atua como um carregador de plugins. Ele percorre o diretório `/opt/v
 
 Para aproveitar o comportamento do binário, criamos um arquivo em `C` contendo a função `plugin_init`. Em seguida, compilamos o código diretamente dentro de `/opt/v2/plugins`, gerando um arquivo `.so` no local onde o binário realiza o `dlopen()`. Assim, quando o executável percorre o diretório e encontra o nosso plugin, ele carrega a biblioteca e executa automaticamente a função plugin_init, permitindo controlar o fluxo do programa.
 
-1.      Primeiro criamos o código em C.
+1 - Primeiro criamos o código em C.
 
 ```bash
 nano plugin.c
@@ -324,7 +324,7 @@ int plugin_init() {
 }
 ```
 
-2.      Compilamos o arquivo direto na pasta /opt/v2/plugins.
+2 - Compilamos o arquivo direto na pasta /opt/v2/plugins.
 
 ```bash
 gcc -shared -fPIC -o /opt/v2/plugins/plugin.so plugin.c

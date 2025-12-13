@@ -58,15 +58,15 @@ async function mostrarDetalhe(post) {
   let html = converter.makeHtml(markdown);
 
   const postDir = post.file.replace(/[^/]*$/, '');
-  html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
-    let novoCaminho;
+
+    html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
     if (p1.startsWith('/')) {
-      novoCaminho = p1.substring(1);
-    } else {
-      novoCaminho = postDir + p1;
+        return m; 
     }
+
+    const novoCaminho = postDir + p1;
     return m.replace(p1, novoCaminho);
-  });
+    });
 
   detalhe.style.display = 'block';
   container.style.display = 'none';
