@@ -5,11 +5,13 @@ const CONFIG = [
   {
     json: "posts.json",
     folder: "posts/",
+    stripFolder: false,
     label: "Post"
   },
   {
     json: "challenges/challenges.json",
     folder: "challenges/",
+    stripFolder: true,
     label: "Challenge"
   }
 ];
@@ -33,18 +35,18 @@ const commitDate = execSync(
 
 let somethingUpdated = false;
 
-CONFIG.forEach(({ json, folder, label }) => {
+CONFIG.forEach(({ json, folder, stripFolder, label }) => {
   if (!fs.existsSync(json)) return;
 
   const data = JSON.parse(fs.readFileSync(json, "utf8"));
   let updated = false;
 
+  const relevantFiles = changedFiles
+    .filter(f => f.startsWith(folder))
+    .map(f => stripFolder ? f.replace(folder, "") : f);
+
   data.forEach(item => {
-    if (
-      item.file &&
-      changedFiles.includes(item.file) &&
-      item.file.startsWith(folder)
-    ) {
+    if (item.file && relevantFiles.includes(item.file)) {
       item.update = commitDate;
       updated = true;
       somethingUpdated = true;

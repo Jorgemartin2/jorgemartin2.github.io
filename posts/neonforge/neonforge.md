@@ -4,7 +4,7 @@
 
 ## Sumário
 
-Durante o teste foi identificada uma sequência de vulnerabilidades que permitiu a um atacante comprometer a aplicação e o servidor: uma vulnerabilidade de `SSTI (Server-Side Template Injection)` foi explorada para obter execução remota limitada (shell reversa). A partir desse acesso inicial foi possível alcançar o servidor de base de dados `PostgreSQL`, onde uma conta com privilégios de `superuser` foi utilizada para executar código no contexto do processo do SGBD. Por fim, devido à configuração de sudo que permite a execução do `binário` do cliente do PostgreSQL sem senha, o atacante conseguiu escalar privilégios e obter acesso root.
+Durante o teste foi identificada uma sequência de vulnerabilidades que permitiu a um atacante comprometer a aplicação e o servidor: uma vulnerabilidade de `SSTI (Server-Side Template Injection)` foi explorada para obter execução remota limitada (shell reversa). A partir desse acesso inicial foi possível alcançar o servidor de base de dados `PostgreSQL`, onde uma conta com privilégios de `superuser` foi utilizada para executar código no contexto do processo do SGBD. Por fim, devido à configuração de sudo que permite a execução do `binário` do cliente do PostgreSQL sem senha, o atacante conseguiu escalar privilégios e obter acesso `root`.
 
 ## Aplicativo Web
 
