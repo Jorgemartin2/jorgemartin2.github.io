@@ -18,7 +18,7 @@ async function carregarPosts() {
         <h3>${post.title}</h3>
         <p>${post.summary}</p>
         <div class="post-meta">
-          <span>📅 ${post.date}</span>
+          <span>📅 Postado em ${post.date}</span> • <span>📅 Atualizado em ${post.update}</span>
           <span>🏷️ ${post.category}</span>
         </div>
       </div>
@@ -76,7 +76,7 @@ async function mostrarDetalhe(post) {
     <div class="post-meta">
       <span>📅 ${post.date}</span>
       <span>🏷️ ${post.category}</span>
-      <span>👨🏻💻 ${post.author}</span>
+      <span>👨🏻‍💻 ${post.author}</span>
     </div>
   `;
 
