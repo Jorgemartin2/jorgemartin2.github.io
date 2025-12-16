@@ -19,7 +19,12 @@ const changedFiles = execSync(
   { encoding: "utf8" }
 )
   .split("\n")
-  .filter(Boolean);
+  .filter(f => f.endsWith(".md"));
+
+if (!changedFiles.length) {
+  console.log("Nenhum Markdown modificado.");
+  process.exit(0);
+}
 
 const commitDate = execSync(
   "git show -s --format=%cd --date=format:'%b %d, %Y'",
@@ -29,17 +34,17 @@ const commitDate = execSync(
 let somethingUpdated = false;
 
 CONFIG.forEach(({ json, folder, label }) => {
-  const relevantChanges = changedFiles.filter(
-    f => f.startsWith(folder) && f.endsWith(".md")
-  );
+  if (!fs.existsSync(json)) return;
 
-  if (!relevantChanges.length) return;
-
-  const items = JSON.parse(fs.readFileSync(json, "utf8"));
+  const data = JSON.parse(fs.readFileSync(json, "utf8"));
   let updated = false;
 
-  items.forEach(item => {
-    if (relevantChanges.includes(item.file)) {
+  data.forEach(item => {
+    if (
+      item.file &&
+      changedFiles.includes(item.file) &&
+      item.file.startsWith(folder)
+    ) {
       item.update = commitDate;
       updated = true;
       somethingUpdated = true;
@@ -48,10 +53,10 @@ CONFIG.forEach(({ json, folder, label }) => {
   });
 
   if (updated) {
-    fs.writeFileSync(json, JSON.stringify(items, null, 2));
+    fs.writeFileSync(json, JSON.stringify(data, null, 2));
   }
 });
 
 if (!somethingUpdated) {
-  console.log("Nenhum post ou challenge atualizado.");
+  console.log("Nenhum post ou challenge correspondente encontrado.");
 }
