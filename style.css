@@ -172,7 +172,7 @@ body {
 }
 
 /* Container principal */
-.post-detalhe {
+.post-details {
   font-family: "Source Sans Pro", "Microsoft Yahei", sans-serif;
   max-width: 900px;
   margin: 20px auto;
@@ -184,12 +184,12 @@ body {
 }
 
 /* Força herança da fonte em todos os elementos internos */
-.post-detalhe * {
+.post-details * {
   font-family: inherit !important;
 }
 
 /* Título do post */
-.post-detalhe h2 {
+.post-details h2 {
   color: #ffffff;
   margin-bottom: 10px;
   font-weight: 600;
@@ -314,7 +314,7 @@ body {
 }
 
 .content,
-.post-detalhe,
+.post-details,
 .post-body {
   overflow-wrap: anywhere;
 }

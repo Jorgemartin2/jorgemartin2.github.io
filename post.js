@@ -1,6 +1,6 @@
-async function carregarPosts() {
-  const resposta = await fetch('posts.json');
-  const posts = await resposta.json();
+async function posts() {
+  const response = await fetch('posts.json');
+  const posts = await response.json();
   const container = document.getElementById('posts');
 
   posts.forEach(post => {
@@ -26,19 +26,19 @@ async function carregarPosts() {
 
     card.addEventListener('click', (e) => {
       e.preventDefault();
-      mostrarDetalhe(post);
+      showDetails(post);
     });
 
     container.appendChild(card);
   });
 }
 
-async function mostrarDetalhe(post) {
+async function showDetails(post) {
   const container = document.getElementById('posts');
-  const detalhe = document.getElementById('post-detalhe');
+  const details = document.getElementById('post-details');
 
-  const resposta = await fetch(post.file);
-  const markdown = await resposta.text();
+  const response = await fetch(post.file);
+  const markdown = await response.text();
 
   const promptExtension = () => [{
     type: 'lang',
@@ -49,13 +49,13 @@ async function mostrarDetalhe(post) {
     }
   }];
 
-  const converter = new showdown.Converter({
+  const convert = new showdown.Converter({
     tables: true,
     ghCodeBlocks: true,
     extensions: [promptExtension]
   });
 
-  let html = converter.makeHtml(markdown);
+  let html = convert.makeHtml(markdown);
 
   const postDir = post.file.replace(/[^/]*$/, '');
 
@@ -64,13 +64,13 @@ async function mostrarDetalhe(post) {
         return m; 
     }
 
-    const novoCaminho = postDir + p1;
-    return m.replace(p1, novoCaminho);
+    const newPath = postDir + p1;
+    return m.replace(p1, newPath);
     });
 
-  detalhe.style.display = 'block';
+  details.style.display = 'block';
   container.style.display = 'none';
-  detalhe.innerHTML = `
+  details.innerHTML = `
     <button id="back" class="back-button">⬅️ Voltar</button>
     <div class="post-body markdown-body">${html}</div>
     <div class="post-meta">
@@ -85,7 +85,7 @@ async function mostrarDetalhe(post) {
   });
 
   document.getElementById('back').addEventListener('click', () => {
-    detalhe.style.display = 'none';
+    details.style.display = 'none';
     container.style.display = 'flex';
   });
 
@@ -110,4 +110,4 @@ async function mostrarDetalhe(post) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', carregarPosts);
+document.addEventListener('DOMContentLoaded', posts);
