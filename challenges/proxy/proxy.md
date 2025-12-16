@@ -8,7 +8,7 @@ Durante a análise do código, foi identificado que a rota `/proxy` recebe um pa
 Por padrão, espera-se que a `url` seja uma string contendo o endereço a ser requisitado.
 
 Entretanto, segundo a documentação do Axios, a função também aceita um `objeto de configuração`, que pode incluir propriedades como `method`, `url`, `headers` e outros parâmetros.
-Esse comportamento introduz uma vulnerabilidade de `Type Confusion` — ou seja, o programa assume que a variável `url` será uma string, mas aceita e processa um tipo diferente (um objeto), alterando completamente a lógica de execução.
+Esse comportamento introduz uma vulnerabilidade de `Type Confusion` — ou seja, o programa assume que a variável url será uma string, mas aceita e processa um tipo diferente `(um objeto)`, alterando completamente a lógica de execução.
 
 ## Analisando o código fonte
 
