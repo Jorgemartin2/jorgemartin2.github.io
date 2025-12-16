@@ -1,0 +1,39 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Update posts.json (commit date)
+        run: node scripts/update-posts-from-commit.js
+
+      - name: Commit posts.json update
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add posts.json
+          git commit -m "chore: update post update date" || echo "No changes"
+          git push
