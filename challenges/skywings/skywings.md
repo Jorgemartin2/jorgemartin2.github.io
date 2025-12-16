@@ -12,7 +12,7 @@ Uma vulnerabilidade nota 10 atingiu `React` e `Next.js` `(CVE-2025-55182 e CVE-2
 
 ## Explorando a vulnerabilidade
 
-Após identificarmos que o servidor apresentava a vulnerabilidade, utilizamos a prova de conceito (PoC)referente à CVE-2025-55182 para obter uma shell no servidor. A PoC, juntamente com a documentação detalhada da vulnerabilidade e de seu impacto nos servidores, está disponível no repositório do GitHub indicado abaixo.
+Após identificarmos que o servidor apresentava a vulnerabilidade, utilizamos a prova de conceito (PoC)referente à CVE-2025-55182 para obter uma shell no servidor. A `PoC`, juntamente com a documentação detalhada da vulnerabilidade e de seu impacto nos servidores, está disponível no repositório do GitHub indicado abaixo.
 
 - [PoC CVE-2025-55182](https://github.com/msanft/CVE-2025-55182)
 
