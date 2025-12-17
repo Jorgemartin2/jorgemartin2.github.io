@@ -53,5 +53,16 @@
     "file": "posts/extract/extract.md",
     "image": "images/hackingclub-extract/file-extract-2025-1.png",
     "author": "Jorge Martin"
+  },
+  {
+    "id": "docflow",
+    "title": "DocFlow",
+    "summary": "O comprometimento tem início a partir da exploração de uma vulnerabilidade presente <br> nas dependências da aplicação.",
+    "date": "Dec 17, 2025",
+    "update": "Dec 17, 2025",
+    "category": "Hacking Club",
+    "file": "posts/docflow/docflow.md",
+    "image": "images/hackingclub-docflow/file-docflow-2025-1.png",
+    "author": "Jorge Martin"
   }
 ]
