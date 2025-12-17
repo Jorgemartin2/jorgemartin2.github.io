@@ -9,7 +9,7 @@ async function posts() {
         card.href = '#';
 
         card.style.backgroundImage = `url(${post.image})`;
-        card.style.backgroundSize = '30% auto';
+        card.style.backgroundSize = '20% auto';
         card.style.backgroundPosition = '100% center';
         card.style.backgroundRepeat = 'no-repeat';
 
