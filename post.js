@@ -1,7 +1,15 @@
+let allPosts = [];
+
 async function posts() {
   const response = await fetch('posts.json');
-  const posts = await response.json();
+  allPosts = await response.json();
+
+  renderPosts(allPosts);
+}
+
+function renderPosts(posts) {
   const container = document.getElementById('posts');
+  container.innerHTML = '';
 
   posts.forEach(post => {
     const card = document.createElement('a');
@@ -9,8 +17,8 @@ async function posts() {
     card.href = '#';
 
     card.style.backgroundImage = `url(${post.image})`;
-    card.style.backgroundSize = '20% auto';
-    card.style.backgroundPosition = '100% center';
+    card.style.backgroundSize = '50% auto';
+    card.style.backgroundPosition = '120% center';
     card.style.backgroundRepeat = 'no-repeat';
 
     card.innerHTML = `
@@ -18,7 +26,8 @@ async function posts() {
         <h3>${post.title}</h3>
         <p>${post.summary}</p>
         <div class="post-meta">
-          <span>📅 Postado em ${post.date}</span> • <span>📅 Atualizado em ${post.update}</span>
+          <span>📅 Postado em ${post.date}</span> •
+          <span>📅 Atualizado em ${post.update}</span>
           <span>🏷️ ${post.category}</span>
         </div>
       </div>
@@ -32,6 +41,19 @@ async function posts() {
     container.appendChild(card);
   });
 }
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const value = e.target.value.toLowerCase();
+
+  const filtered = allPosts.filter(post =>
+    post.title.toLowerCase().includes(value) ||
+    post.summary.toLowerCase().includes(value) ||
+    post.category.toLowerCase().includes(value)
+  );
+
+  renderPosts(filtered);
+});
+
 
 async function showDetails(post) {
   const container = document.getElementById('posts');
@@ -59,14 +81,14 @@ async function showDetails(post) {
 
   const postDir = post.file.replace(/[^/]*$/, '');
 
-    html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
+  html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
     if (p1.startsWith('/')) {
-        return m; 
+      return m;
     }
 
     const newPath = postDir + p1;
     return m.replace(p1, newPath);
-    });
+  });
 
   details.style.display = 'block';
   container.style.display = 'none';
