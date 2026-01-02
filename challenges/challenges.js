@@ -101,7 +101,7 @@ async function showDetails(post) {
       <span>👨🏻‍💻 ${post.author}</span>
     </div>
   `;
-
+  
     document.querySelectorAll('pre code').forEach(block => {
         if (window.hljs) hljs.highlightElement(block);
     });
