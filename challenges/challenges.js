@@ -1,37 +1,58 @@
+let allPosts = [];
+
 async function posts() {
-    const response = await fetch('challenges.json');
-    const posts = await response.json();
-    const container = document.getElementById('posts');
+  const response = await fetch('challenges.json');
+  allPosts = await response.json();
 
-    posts.forEach(post => {
-        const card = document.createElement('a');
-        card.className = 'post-card';
-        card.href = '#';
+  renderPosts(allPosts);
+}
 
-        card.style.backgroundImage = `url(${post.image})`;
-        card.style.backgroundSize = '20% auto';
-        card.style.backgroundPosition = '100% center';
-        card.style.backgroundRepeat = 'no-repeat';
+function renderPosts(posts) {
+  const container = document.getElementById('posts');
+  container.innerHTML = '';
 
-        card.innerHTML = `
+  posts.forEach(post => {
+    const card = document.createElement('a');
+    card.className = 'post-card';
+    card.href = '#';
+
+    card.style.backgroundImage = `url(${post.image})`;
+    card.style.backgroundSize = '50% auto';
+    card.style.backgroundPosition = '120% center';
+    card.style.backgroundRepeat = 'no-repeat';
+
+    card.innerHTML = `
       <div class="post-text">
         <h3>${post.title}</h3>
         <p>${post.summary}</p>
         <div class="post-meta">
-          <span>📅 Postado em ${post.date}</span> • <span>📅 Atualizado em ${post.update}</span>
+          <span>📅 Postado em ${post.date}</span> •
+          <span>📅 Atualizado em ${post.update}</span>
           <span>🏷️ ${post.category}</span>
         </div>
       </div>
     `;
 
-        card.addEventListener('click', (e) => {
-            e.preventDefault();
-            showDetails(post);
-        });
-
-        container.appendChild(card);
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      showDetails(post);
     });
+
+    container.appendChild(card);
+  });
 }
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const value = e.target.value.toLowerCase();
+
+  const filtered = allPosts.filter(post =>
+    post.title.toLowerCase().includes(value) ||
+    post.summary.toLowerCase().includes(value) ||
+    post.category.toLowerCase().includes(value)
+  );
+
+  renderPosts(filtered);
+});
 
 async function showDetails(post) {
     const container = document.getElementById('posts');
