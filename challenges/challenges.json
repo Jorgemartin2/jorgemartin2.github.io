@@ -20,16 +20,5 @@
     "file": "skywings/skywings.md",
     "image": "/images/hackingclub-skywings/file-skywings-2025-3.png",
     "author": "Jorge Martin"
-  },
-  {
-    "id": "ultracars",
-    "title": "Ultracars",
-    "summary": "Vulnerabilidade de Deserialização Insegura na biblioteca pickles.",
-    "date": "Jan 02, 2026",
-    "update": "Jan 02, 2026",
-    "category": "Hacking Club",
-    "file": "ultracars/ultracars.md",
-    "image": "/images/hackingclub-ultracars/file-ultracars-2026-1.png",
-    "author": "Jorge Martin"
   }
 ]
