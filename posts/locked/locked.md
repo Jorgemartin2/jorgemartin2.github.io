@@ -4,7 +4,7 @@
 
 ## Sumário
 
-A máquina LOCKED apresenta uma cadeia de comprometimento que começou com uma vulnerabilidade de `PHP insecure deserialization` no aplicativo web. A falha permitiu enviar dados serializados maliciosos que, ao serem desserializados pelo servidor, levaram à execução remota de código (RCE). A partir desse ponto inicial o atacante obteve execução de comandos no contexto do processo PHP e pôde explorar o sistema de arquivos e a configuração local. Durante o reconhecimento foi identificado um `binário git` marcado com `SUID` — uma configuração sensível que permitia ao usuário que o executasse ler arquivos que normalmente exigiriam privilégios elevados. Aproveitando esse SUID foi possível ler o arquivo de `chave privada root (/root/.ssh/id_rsa)`, importar a chave e estabelecer uma sessão `SSH` autenticada como root, alcançando assim controle total do sistema.
+O comprometimento começou com uma vulnerabilidade de `PHP insecure deserialization` no aplicativo web. A falha permitiu enviar dados serializados maliciosos que, ao serem desserializados pelo servidor, levaram à execução remota de código (RCE). A partir desse ponto inicial o atacante obteve execução de comandos no contexto do processo PHP e pôde explorar o sistema de arquivos e a configuração local. Durante o reconhecimento foi identificado um `binário git` marcado com `SUID` — uma configuração sensível que permitia ao usuário que o executasse ler arquivos que normalmente exigiriam privilégios elevados. Aproveitando esse SUID foi possível ler o arquivo de `chave privada root (/root/.ssh/id_rsa)`, importar a chave e estabelecer uma sessão `SSH` autenticada como `root`, alcançando assim controle total do sistema.
 
 ## Descoberta de aplicativo web
 

@@ -154,7 +154,7 @@ http://0x7f000001:3000/api/dashboards/uid/private-users
 
 ## SSH
 
-Após obter as credenciais de acesso SSH ao host, identificamos a existência de outro usuário, astrtid. Com isso, podemos realizar movimentação lateral dentro do sistema para tentar obter acesso à conta desse usuário.
+Após obter as credenciais de acesso SSH ao host, identificamos a existência de outro usuário, `astrid`. Com isso, podemos realizar movimentação lateral dentro do sistema para tentar obter acesso à conta desse usuário.
 
 ![SSH](/images/hackingclub-extract/file-extract-2025-7.png)
 ![Users Host](/images/hackingclub-extract/file-extract-2025-8.png)

