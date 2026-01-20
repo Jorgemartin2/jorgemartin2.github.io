@@ -64,5 +64,16 @@
     "file": "posts/docflow/docflow.md",
     "image": "images/hackingclub-docflow/file-docflow-2025-1.png",
     "author": "Jorge Martin"
+  },
+  {
+    "id": "captain",
+    "title": "Captain",
+    "summary": "O comprometimento tem início a partir de uma vulnerabilidade de Directory Traversal que <br> permite a leitura arbitrária de arquivos sensíveis no servidor.",
+    "date": "Jan 23, 2026",
+    "update": "Jan 23, 2026",
+    "category": "Hacking Club",
+    "file": "posts/captain/captain.md",
+    "image": "images/hackingclub-captain/file-captain-2026-1.png",
+    "author": "Jorge Martin"
   }
 ]

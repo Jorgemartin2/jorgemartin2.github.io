@@ -99,7 +99,6 @@ fi
 ```
 
 > ❌ À primeira vista, o script aparenta ser inofensivo, pois apenas compara se a entrada do usuário é igual a 42 e exibe mensagens na tela. No entanto, ao analisá-lo com mais atenção, observa-se que o uso incorreto de funções e configurações inadequadas pode introduzir vulnerabilidades que possibilitam a movimentação lateral dentro do servidor.
-
 {: .prompt-danger}
 
 1 - Executamos o script utilizando sudo, especificando o usuário axel, a fim de obter as permissões necessárias para sua execução.
