@@ -173,7 +173,7 @@ curl -X POST http://captain.hc/api/book \
 
 ![Reverse Shell](/images/hackingclub-captain/file-captain-2026-5.png)
 
-## Cluster do Kubernetes
+## Cluster Kubernetes
 
 Após obtermos acesso ao servidor, nos deparamos com uma shell com comportamento atípico. Ao analisarmos o ambiente com mais atenção, identificamos que estávamos executando dentro de um container pertencente a um `cluster Kubernetes`.
 
