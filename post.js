@@ -150,14 +150,6 @@ async function showDetails(post) {
     isDragging = false;
   });
 
-  window.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-
-    posX = e.clientX - startX;
-    posY = e.clientY - startY;
-    updateTransform();
-  });
-
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.style.display = "none";
