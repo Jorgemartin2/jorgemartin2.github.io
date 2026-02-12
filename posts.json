@@ -81,7 +81,7 @@
     "title": "Logs",
     "summary": "A exploração teve início com uma secret fraca no JWT, permitindo a forja do token. Com isso,<br> foi possível burlar a autenticação e explorar a funcionalidade de leitura arbitrária de arquivos.",
     "date": "Fev 11, 2026",
-    "update": "Fev 11, 2026",
+    "update": "Feb 12, 2026",
     "category": "Hacking Club",
     "file": "posts/logs/logs.md",
     "image": "images/hackingclub-logs/file-logs-2026-1.png",
