@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boletim - WASPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a4d4d 0%, #2d7373 50%, #3d9999 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #2d7373;
+            font-size: 2em;
+        }
+        
+        .user-info {
+            text-align: right;
+        }
+        
+        .user-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .logout {
+            background: #c62828;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .logout:hover {
+            background: #b71c1c;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .warning h2 {
+            margin-bottom: 10px;
+        }
+        
+        .download-section {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            color: #0d47a1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .download-section h3 {
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            background: #2196f3;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+        
+        .download-btn:hover {
+            background: #1976d2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: #2d7373;
+            color: white;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐝 WASPS</h1>
+        <div class="user-info">
+            <p><strong>{{ session.name }}</strong></p>
+            <p>RA: {{ session.ra }}</p>
+            <a href="{{ url_for('logout') }}" class="logout">Sair</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2 style="color: #2d7373; margin-bottom: 20px;">Boletim Acadêmico</h2>
+        
+        {% if grades_dict|length == 0 %}
+        <div class="warning">
+            <h2>Nenhuma nota disponível</h2>
+            <p>As notas ainda não foram publicadas pelos professores.</p>
+            <p>Aguarde a liberação do boletim.</p>
+        </div>        
+        {% endif %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Matéria</th>
+                    <th>Nota</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject }}</td>
+                    <td>{% if subject in grades_dict %}{{ grades_dict[subject] }}{% else %}-{% endif %}</td>
+                    <td>{% if subject in grades_dict %}{% if grades_dict[subject] >= 6.0 %}✅ Aprovado{% else %}❌ Reprovado{% endif %}{% else %}-{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

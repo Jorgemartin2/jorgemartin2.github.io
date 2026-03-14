@@ -86,5 +86,16 @@
     "file": "posts/logs/logs.md",
     "image": "images/hackingclub-logs/file-logs-2026-1.png",
     "author": "Jorge Martin"
+  },
+  {
+    "id": "carnavown",
+    "title": "CarnavOwn",
+    "summary": "CarnaVown é uma coleção de desafios diversos que vão desde exploração web e invasão<br> de binários até engenharia reversa em dispositivos móveis e descriptografia de ransomware. ",
+    "date": "Mar 11, 2026",
+    "update": "Mar 11, 2026",
+    "category": "Hacking Club",
+    "file": "posts/carnavown/carnavown.md",
+    "image": "images/hackingclub-carnavown/file-carnavown-2026-1.png",
+    "author": "Jorge Martin"
   }
 ]

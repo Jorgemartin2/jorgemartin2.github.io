@@ -31,5 +31,27 @@
     "file": "ultracars/ultracars.md",
     "image": "/images/hackingclub-ultracars/file-ultracars-2026-1.png",
     "author": "Jorge Martin"
+  },
+  {
+    "id": "codestorm",
+    "title": "CodeStorm",
+    "summary": "Vulnerabilidade de SQL Injection e Type-Confusion.",
+    "date": "Fev 28, 2026",
+    "update": "Fev 28, 2026",
+    "category": "Hacking Club",
+    "file": "codestorm/codestorm.md",
+    "image": "/images/hackingclub-codestorm/file-codestorm-2026-1.png",
+    "author": "Jorge Martin"
+  },
+  {
+    "id": "red",
+    "title": "Red",
+    "summary": "Execução Remota de Código no Node-RED por Meio de Configuração Incorreta.",
+    "date": "Mar 07, 2026",
+    "update": "Mar 07, 2026",
+    "category": "Hacking Club",
+    "file": "red/red.md",
+    "image": "/images/hackingclub-red/file-red-2026-1.png",
+    "author": "Jorge Martin"
   }
 ]

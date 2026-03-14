@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserir Notas - WASPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a4d4d 0%, #2d7373 50%, #3d9999 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #2d7373;
+            font-size: 2em;
+        }
+        
+        .user-info {
+            text-align: right;
+        }
+        
+        .user-info p {
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .logout {
+            background: #c62828;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .logout:hover {
+            background: #b71c1c;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            color: #2d7373;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2d7373;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2d7373;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #1a4d4d;
+        }
+        
+        .flash {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .flash.error {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .flash.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐝 WASPS - Painel do Professor</h1>
+        <div class="user-info">
+            <p><strong>{{ session.name }}</strong></p>
+            <p>RA: {{ session.ra }}</p>
+            <a href="{{ url_for('logout') }}" class="logout">Sair</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Buscar Aluno</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('search_student') }}" style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #e0e0e0;">
+            <div class="form-group">
+                <label for="search_term">Pesquisar por RA ou Nome</label>
+                <input type="text" id="search_term" name="search_term" placeholder="Digite o RA ou nome do aluno" required>
+            </div>
+            
+            <button type="submit">🔍 Buscar Aluno</button>
+        </form>
+        
+        {% if search_results|length > 0 %}
+        <div style="margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #e0e0e0;">
+            <h3 style="color: #2d7373; margin-bottom: 20px;">Resultados da Busca</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #2d7373; color: white;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">ID</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">RA</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Nome</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Cargo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in search_results %}
+                    <tr style="border: 1px solid #ddd;">
+                        <td style="padding: 12px; border: 1px solid #ddd;">{{ result[0] }}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">{{ result[1] }}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">{{ result[2] }}</td>
+                        <td style="padding: 12px; border: 1px solid #ddd;">{{ result[4] if result|length > 4 else '-' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        
+        <h2>Inserir Notas</h2>
+        
+        <form method="POST" action="{{ url_for('insert_grades') }}">
+            <div class="form-group">
+                <label for="student_ra">RA do Aluno</label>
+                <input type="text" id="student_ra" name="student_ra" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">Matéria</label>
+                <select id="subject" name="subject" required>
+                    <option value="">Selecione uma matéria</option>
+                    <option value="Algoritmos e Estruturas de Dados">Algoritmos e Estruturas de Dados</option>
+                    <option value="Programação Orientada a Objetos">Programação Orientada a Objetos</option>
+                    <option value="Banco de Dados">Banco de Dados</option>
+                    <option value="Redes de Computadores">Redes de Computadores</option>
+                    <option value="Sistemas Operacionais">Sistemas Operacionais</option>
+                    <option value="Engenharia de Software">Engenharia de Software</option>
+                    <option value="Inteligência Artificial">Inteligência Artificial</option>
+                    <option value="Segurança da Informação">Segurança da Informação</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="grade">Nota (0-10)</label>
+                <input type="number" id="grade" name="grade" min="0" max="10" step="0.1" required>
+            </div>
+            
+            <button type="submit">Inserir Nota</button>
+        </form>
+    </div>
+</body>
+</html>
