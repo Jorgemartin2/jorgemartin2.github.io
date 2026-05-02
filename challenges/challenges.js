@@ -55,13 +55,13 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
 });
 
 async function showDetails(post) {
-    const container = document.getElementById('posts');
-    const details = document.getElementById('post-details');
+  const container = document.getElementById('posts');
+  const details = document.getElementById('post-details');
 
-    const response = await fetch(post.file);
-    const markdown = await response.text();
+  const response = await fetch(post.file);
+  const markdown = await response.text();
 
-      const promptExtension = () => [{
+  const promptExtension = () => [{
     type: 'lang',
     regex: /(^>[\s\S]*?)\s*\{\:\s*\.([\w-]+)\s*\}/gm,
     replace: (match, content, cls) => {
@@ -70,29 +70,29 @@ async function showDetails(post) {
     }
   }];
 
-    const convert = new showdown.Converter({
-        tables: true,
-        ghCodeBlocks: true,
-        extensions: [promptExtension]
-    });
+  const convert = new showdown.Converter({
+    tables: true,
+    ghCodeBlocks: true,
+    extensions: [promptExtension]
+  });
 
-    let html = convert.makeHtml(markdown);
+  let html = convert.makeHtml(markdown);
 
-    const postDir = post.file.replace(/[^/]*$/, '');
+  const postDir = post.file.replace(/[^/]*$/, '');
 
-    html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
+  html = html.replace(/(?:src|href)="(?!https?:|#)([^"]+)"/g, (m, p1) => {
     if (p1.startsWith('/')) {
-        return m; 
+      return m;
     }
 
     const newPath = postDir + p1;
     return m.replace(p1, newPath);
-    });
+  });
 
 
-    details.style.display = 'block';
-    container.style.display = 'none';
-    details.innerHTML = `
+  details.style.display = 'block';
+  container.style.display = 'none';
+  details.innerHTML = `
     <button id="back" class="back-button">⬅️ Voltar</button>
     <div class="post-body  markdown-body">${html}</div>
     <div class="post-meta">
@@ -102,108 +102,108 @@ async function showDetails(post) {
     </div>
   `;
 
-    const modal = document.getElementById("img-modal");
-    const modalImg = document.getElementById("img-modal-target");
-    const closeBtn = document.querySelector(".img-modal-close");
+  const modal = document.getElementById("img-modal");
+  const modalImg = document.getElementById("img-modal-target");
+  const closeBtn = document.querySelector(".img-modal-close");
 
-    let scale = 1;
-    let posX = 0;
-    let posY = 0;
-    let isDragging = false;
-    let startX, startY;
+  let scale = 1;
+  let posX = 0;
+  let posY = 0;
+  let isDragging = false;
+  let startX, startY;
 
-    document.querySelectorAll(".post-body img").forEach(img => {
-      img.addEventListener("click", () => {
-        modal.style.display = "block";
-        modalImg.src = img.src;
+  document.querySelectorAll(".post-body img").forEach(img => {
+    img.addEventListener("click", () => {
+      modal.style.display = "block";
+      modalImg.src = img.src;
 
-        scale = 1;
-        posX = 0;
-        posY = 0;
-        updateTransform();
-      });
+      scale = 1;
+      posX = 0;
+      posY = 0;
+      updateTransform();
     });
+  });
 
-    closeBtn.onclick = () => {
+  closeBtn.onclick = () => {
+    modal.style.display = "none";
+  };
+
+  modal.addEventListener("wheel", (e) => {
+    e.preventDefault();
+
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    scale += delta;
+
+    if (scale < 0.2) scale = 0.2;
+    if (scale > 8) scale = 8;
+
+    updateTransform();
+  });
+
+  modal.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+    updateTransform();
+  });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
       modal.style.display = "none";
-    };
-
-    modal.addEventListener("wheel", (e) => {
-      e.preventDefault();
-
-      const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      scale += delta;
-
-      if (scale < 0.2) scale = 0.2;
-      if (scale > 8) scale = 8; 
-
-      updateTransform();
-    });
-
-    modal.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      startX = e.clientX - posX;
-      startY = e.clientY - posY;
-    });
-
-    window.addEventListener("mouseup", () => {
-      isDragging = false;
-    });
-
-    window.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-
-      posX = e.clientX - startX;
-      posY = e.clientY - startY;
-      updateTransform();
-    });
-
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.style.display = "none";
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.style.display === "block") {
-        modal.style.display = "none";
-      }
-    });
-
-    function updateTransform() {
-      modalImg.style.transform =
-        `translate(calc(-50% + ${posX}px), calc(-50% + ${posY}px)) scale(${scale})`;
     }
+  });
 
-    document.querySelectorAll('pre code').forEach(block => {
-        if (window.hljs) hljs.highlightElement(block);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "block") {
+      modal.style.display = "none";
+    }
+  });
+
+  function updateTransform() {
+    modalImg.style.transform =
+      `translate(calc(-50% + ${posX}px), calc(-50% + ${posY}px)) scale(${scale})`;
+  }
+
+  document.querySelectorAll('pre code').forEach(block => {
+    if (window.hljs) hljs.highlightElement(block);
+  });
+
+  document.getElementById('back').addEventListener('click', () => {
+    details.style.display = 'none';
+    container.style.display = 'flex';
+  });
+
+
+  const btn = document.getElementById("scrollTopBtn");
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY + window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    if (window.scrollY > 100) {
+      btn.classList.add("show");
+    } else {
+      btn.classList.remove("show");
+    }
+  });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
     });
-
-    document.getElementById('back').addEventListener('click', () => {
-        details.style.display = 'none';
-        container.style.display = 'flex';
-    });
-
-
-    const btn = document.getElementById("scrollTopBtn");
-
-    window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY + window.innerHeight;
-        const docHeight = document.documentElement.scrollHeight;
-
-        if (scrollTop >= docHeight - 5) {
-            btn.classList.add("show");
-        } else {
-            btn.classList.remove("show");
-        }
-    });
-
-    btn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', posts);

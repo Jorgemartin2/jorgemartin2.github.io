@@ -53,5 +53,16 @@
     "file": "red/red.md",
     "image": "/images/hackingclub-red/file-red-2026-1.png",
     "author": "Jorge Martin"
+  },
+  {
+    "id": "toctoc",
+    "title": "TocToc",
+    "summary": "Vulnerabilidade de Race Condition.",
+    "date": "Abr 01, 2026",
+    "update": "Abr 01, 2026",
+    "category": "Hacking Club",
+    "file": "toctoc/toctoc.md",
+    "image": "/images/hackingclub-toctoc/file-toctoc-2026-1.png",
+    "author": "Jorge Martin"
   }
 ]

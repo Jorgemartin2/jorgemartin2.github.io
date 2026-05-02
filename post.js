@@ -135,7 +135,7 @@ async function showDetails(post) {
     scale += delta;
 
     if (scale < 0.2) scale = 0.2;
-    if (scale > 8) scale = 8; 
+    if (scale > 8) scale = 8;
 
     updateTransform();
   });
@@ -182,7 +182,7 @@ async function showDetails(post) {
     const scrollTop = window.scrollY + window.innerHeight;
     const docHeight = document.documentElement.scrollHeight;
 
-    if (scrollTop >= docHeight - 5) {
+    if (window.scrollY > 100) {
       btn.classList.add("show");
     } else {
       btn.classList.remove("show");
