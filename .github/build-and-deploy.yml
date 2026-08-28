@@ -34,15 +34,6 @@ jobs:
         run: |
           git log -1 --format=%cI > last-update.txt
 
-          echo "=== Arquivo criado ==="
-          cat last-update.txt
-
-          echo "=== Diretório atual ==="
-          pwd
-
-          echo "=== Arquivos ==="
-          ls -la
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -50,3 +41,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
