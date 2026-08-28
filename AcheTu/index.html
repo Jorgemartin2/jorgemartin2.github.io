@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07100d" />
+    <title>AcheTu | Verificador SambaTu</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="AcheTu, início"><span class="brand-mark">A&gt;_</span><span>ACHE<span>TU</span></span></a>
+        <div class="connection"><i></i><span id="sourceStatus">INICIALIZANDO BASE LOCAL</span></div>
+      </header>
+
+      <section id="top" class="hero">
+        <p class="eyebrow">// PASSWORD EXPOSURE CHECK</p>
+        <h1>Essa senha já<br /><em>deu bandeira?</em></h1>
+        <p class="intro">Consulte localmente a wordlist brasileira <strong>SambaTu</strong>. Sem API, sem envio, sem armazenamento da senha.</p>
+      </section>
+
+      <section class="console-card" aria-labelledby="check-title">
+        <div class="card-topline"><span>01 / CONSULTA</span><span class="locked">◈ MODO OFFLINE</span></div>
+        <div class="terminal-line"><span class="prompt">achetu@local:~$</span><span> ./verificar-senha</span></div>
+        <h2 id="check-title">Verificar exposição</h2>
+        <form id="checkForm" novalidate>
+          <label for="password">Senha para auditoria</label>
+          <div class="input-wrap">
+            <input id="password" name="password" type="password" autocomplete="off" spellcheck="false" placeholder="Digite ou cole a senha" disabled />
+            <button class="toggle-password" type="button" aria-label="Mostrar senha" disabled>
+              <span class="eye">◉</span>
+            </button>
+          </div>
+          <button id="checkButton" class="check-button" type="submit" disabled><span>EXECUTAR CONSULTA</span><kbd>↵</kbd></button>
+        </form>
+        <p class="privacy-note"><span>▣</span> A comparação acontece no seu navegador. A senha não sai desta máquina.</p>
+      </section>
+
+      <section id="result" class="result" aria-live="polite" hidden>
+        <div class="result-icon" id="resultIcon">!</div>
+        <div>
+          <p id="resultKicker" class="eyebrow">RESULTADO</p>
+          <h2 id="resultTitle"></h2>
+          <p class="queried-password"><span>SENHA CONSULTADA</span><code id="resultPassword"></code></p>
+          <p id="resultText"></p>
+        </div>
+      </section>
+
+      <section id="loader" class="loader-card" hidden>
+        <div class="loader-copy"><p class="eyebrow">BASE DE DADOS</p><h2>Carregue a SambaTu</h2><p>Selecione o arquivo <code>SambaTu.txt</code> original para habilitar a consulta. Ele será processado apenas nesta aba.</p></div>
+        <label class="file-button" for="wordlistInput">SELECIONAR WORDLIST <input id="wordlistInput" type="file" accept=".txt,text/plain" /></label>
+      </section>
+
+      <section class="details-grid">
+        <article><span class="detail-index">01</span><h3>Local por padrão</h3><p>Nenhuma senha é enviada para um servidor, API ou serviço de terceiros.</p></article>
+        <article><span class="detail-index">02</span><h3>Fonte única</h3><p>O resultado indica somente a presença na SambaTu; não consulta outras bases.</p></article>
+        <article><span class="detail-index">03</span><h3>Uso autorizado</h3><p>Para auditorias, pentests e análise de credenciais sob sua autorização.</p></article>
+      </section>
+
+      <footer><span>ACHETU / LOCAL PASSWORD AUDIT</span><span id="wordCount">AGUARDANDO WORDLIST</span><a href="https://github.com/HideMeBr/SambaTu" target="_blank" rel="noreferrer">SAMBA TU ↗</a></footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
